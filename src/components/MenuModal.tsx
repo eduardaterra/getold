@@ -1,11 +1,30 @@
+import { useState } from "react";
 import { Link as ScrollLink } from "react-scroll";
 import styled from "styled-components";
 
-const MenuModal = () => {
-  return (
+type propsType = {
+  showModal: boolean;
+  setShowModal: (value: boolean) => void;
+  slide: string;
+  setSlide: (value: string) => void;
+};
+
+const MenuModal = (props: propsType) => {
+  const { showModal, setShowModal, slide, setSlide } = props;
+
+  return showModal ? (
     <>
-      <MenuContainer>
-        <CloseButton>X</CloseButton>
+      <MenuContainer slide={slide}>
+        <CloseButton
+          onClick={() => {
+            setSlide("slide-out");
+            setTimeout(() => {
+              setShowModal(false);
+            }, 300);
+          }}
+        >
+          X
+        </CloseButton>
         <LinksContainer>
           <ScrollLink to="inicio">início</ScrollLink>
           <ScrollLink to="sobre">sobre</ScrollLink>
@@ -14,10 +33,10 @@ const MenuModal = () => {
         <Button>simulador</Button>
       </MenuContainer>
     </>
-  );
+  ) : null;
 };
 
-const MenuContainer = styled.div`
+const MenuContainer = styled.div<Pick<propsType, "slide">>`
   background: var(--black);
   position: fixed;
   display: flex;
@@ -28,9 +47,30 @@ const MenuContainer = styled.div`
   z-index: 20;
   min-height: 100vh;
   min-width: 100vw;
-  top: 0;
   left: 0;
-  transition: 0.3s ease-in-out;
+  animation: ${({ slide }) => slide} 0.3s ease-out;
+
+  @keyframes slide-in {
+    0% {
+      top: -100%;
+      opacity: 100%;
+    }
+    100% {
+      top: 0%;
+      opacity: 0%;
+    }
+  }
+
+  @keyframes slide-out {
+    0% {
+      top: 0%;
+      opacity: 0%;
+    }
+    100% {
+      top: -100%;
+      opacity: 100%;
+    }
+  }
 `;
 
 const CloseButton = styled.button`

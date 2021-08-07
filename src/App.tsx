@@ -1,14 +1,12 @@
-import Header from "./components/Header";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import MenuModal from "./components/MenuModal";
+import Home from "./pages/Home";
 
 function App() {
   return (
     <>
       <BrowserRouter>
-        <MenuModal />
         <Switch>
-          <Route path="/" />
+          <Route path="/" component={Home} />
         </Switch>
       </BrowserRouter>
     </>

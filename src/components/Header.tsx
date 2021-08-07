@@ -4,14 +4,26 @@ import { Link as ScrollLink } from "react-scroll";
 
 import Menu from "../assets/menu.svg";
 
-const Header = () => {
+type propsType = {
+  setShowModal: (value: boolean) => void;
+  setSlide: (value: string) => void;
+};
+
+const Header = (props: propsType) => {
+  const { setShowModal, setSlide } = props;
   return (
     <>
       <HeaderContainer>
         <Link to="/">
           get<strong>old</strong>
         </Link>
-        <MobileMenuIcon src={Menu} />
+        <MobileMenuIcon
+          src={Menu}
+          onClick={() => {
+            setShowModal(true);
+            setSlide("slide-in");
+          }}
+        />
         <MobileMenu>
           <ScrollLink to="inicio">início</ScrollLink>
           <ScrollLink to="sobre">sobre</ScrollLink>
