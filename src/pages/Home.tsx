@@ -3,6 +3,7 @@ import { Element } from "react-scroll";
 import AboutSection from "../components/AboutSection";
 import Header from "../components/Header";
 import InitialSection from "../components/InitialSection";
+import InstructionsSection from "../components/InstructionsSection";
 import MenuModal from "../components/MenuModal";
 
 const Home = () => {
@@ -23,6 +24,9 @@ const Home = () => {
       </Element>
       <Element name="sobre" className="element">
         <AboutSection />
+      </Element>
+      <Element name="como-utilizar" className="element">
+        <InstructionsSection />
       </Element>
     </>
   );
