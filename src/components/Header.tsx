@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
-import { Link as ScrollLink } from "react-scroll";
+import { Link as ScrollLink, animateScroll } from "react-scroll";
 
 import Menu from "../assets/menu.svg";
 
@@ -14,9 +13,19 @@ const Header = (props: propsType) => {
   return (
     <>
       <HeaderContainer>
-        <Link to="/">
+        <ScrollLink
+          activeClass="active"
+          to="/"
+          smooth={true}
+          duration={500}
+          spy={true}
+          offset={-80}
+          onClick={() => {
+            animateScroll.scrollToTop();
+          }}
+        >
           get<strong>old</strong>
-        </Link>
+        </ScrollLink>
         <MobileMenuIcon
           src={Menu}
           onClick={() => {
@@ -24,11 +33,39 @@ const Header = (props: propsType) => {
             setSlide("slide-in");
           }}
         />
-        <MobileMenu>
-          <ScrollLink to="inicio">início</ScrollLink>
-          <ScrollLink to="sobre">sobre</ScrollLink>
-          <ScrollLink to="como-utilizar">como utilizar</ScrollLink>
-        </MobileMenu>
+
+        <MenuContainer>
+          <ScrollLink
+            to="inicio"
+            activeClass="active"
+            smooth={true}
+            duration={500}
+            spy={true}
+            offset={-80}
+          >
+            início
+          </ScrollLink>
+          <ScrollLink
+            to="sobre"
+            activeClass="active"
+            smooth={true}
+            duration={500}
+            spy={true}
+            offset={-80}
+          >
+            sobre
+          </ScrollLink>
+          <ScrollLink
+            to="como-utilizar"
+            activeClass="active"
+            smooth={true}
+            duration={500}
+            spy={true}
+            offset={-80}
+          >
+            como utilizar
+          </ScrollLink>
+        </MenuContainer>
         <Button>simulador</Button>
       </HeaderContainer>
     </>
@@ -36,27 +73,31 @@ const Header = (props: propsType) => {
 };
 
 const HeaderContainer = styled.div`
-  background: var(--black);
+  background: black;
   position: sticky;
+  top: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 5rem;
   width: 100%;
   z-index: 1;
+
   padding: 0 2rem;
   > a {
     font: bold italic 2.5rem "Ubuntu", sans-serif;
     text-decoration: none;
     cursor: pointer;
+    color: white;
 
-    color: var(--white);
     > strong {
       color: var(--purple);
     }
   }
+  @media (max-width: 1024px) {
+    gap: 4rem;
+  }
   @media (max-width: 700px) {
-    height: 4.5rem;
     > a {
       font-size: 2.2rem;
     }
@@ -65,7 +106,7 @@ const HeaderContainer = styled.div`
 const MobileMenuIcon = styled.img`
   display: none;
   width: 1.8rem;
-  @media (max-width: 700px) {
+  @media (max-width: 758px) {
     display: block;
     cursor: pointer;
     position: absolute;
@@ -75,7 +116,7 @@ const MobileMenuIcon = styled.img`
   }
 `;
 
-const MobileMenu = styled.ul`
+const MenuContainer = styled.ul`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -85,17 +126,24 @@ const MobileMenu = styled.ul`
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--white);
-    font: 500 1.4rem "Ubuntu", sans-serif;
+    color: white;
+    font: 500 1.5rem "Ubuntu", sans-serif;
     text-decoration: none;
     cursor: pointer;
     height: 5rem;
+    transition: all 0.1s ease-in-out;
     :hover,
     &.active {
       border-bottom: 3px solid var(--purple);
     }
   }
-  @media (max-width: 700px) {
+  @media (max-width: 1024px) {
+    > a {
+      font-size: 1.2rem;
+    }
+  }
+
+  @media (max-width: 758px) {
     display: none;
   }
 `;
@@ -103,15 +151,16 @@ const Button = styled.button`
   background: var(--purple);
   border: none;
   border-radius: 3rem;
-  color: var(--black);
+  color: black;
   font: 500 1.4rem "Ubuntu", sans-serif;
   padding: 0.2rem 0.8rem;
   cursor: pointer;
+  transition: all 0.2s ease-in-out;
   :hover {
-    background: var(--white);
+    background: white;
     color: var(--purple);
   }
-  @media (max-width: 700px) {
+  @media (max-width: 758px) {
     display: none;
   }
 `;

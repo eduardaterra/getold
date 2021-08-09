@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Link as ScrollLink } from "react-scroll";
 import styled from "styled-components";
 
@@ -37,7 +36,7 @@ const MenuModal = (props: propsType) => {
 };
 
 const MenuContainer = styled.div<Pick<propsType, "slide">>`
-  background: var(--black);
+  background: black;
   position: fixed;
   display: flex;
   flex-direction: column;
@@ -78,10 +77,10 @@ const CloseButton = styled.button`
   font: 500 2rem "Ubuntu", sans-serif;
   border: none;
   cursor: pointer;
-  color: var(--white);
+  color: white;
   display: flex;
   position: absolute;
-  transform: translate(8rem, -16rem);
+  transform: translate(40vw, -45vh);
 
   :hover {
     color: var(--purple);
@@ -98,7 +97,7 @@ const LinksContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--white);
+    color: white;
     font: 500 1.4rem "Ubuntu", sans-serif;
     text-decoration: none;
     cursor: pointer;
@@ -113,12 +112,12 @@ const Button = styled.div`
   background: var(--purple);
   border: none;
   border-radius: 3rem;
-  color: var(--black);
+  color: black;
   font: 500 1.4rem "Ubuntu", sans-serif;
   padding: 0.2rem 0.8rem;
   cursor: pointer;
   :hover {
-    background: var(--white);
+    background: white;
     color: var(--purple);
   }
 `;
