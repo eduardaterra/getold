@@ -67,8 +67,8 @@ const AboutContainer = styled.div`
     }
   }
   @media (max-width: 758px) {
-    height: 100%;
     padding: 2rem 1rem;
+    min-height: 90.3vh;
     > img {
       width: 8rem;
     }
@@ -79,6 +79,9 @@ const AboutContainer = styled.div`
       font-size: 2rem;
       text-align: center;
     }
+  }
+  @media (max-width: 400px) {
+    height: 100%;
   }
 `;
 

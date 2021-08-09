@@ -63,7 +63,7 @@ const InstructionsContainer = styled.div`
   @media (max-width: 970px) {
     height: 100%;
     padding-top: 3rem;
-    gap: 2rem;
+    gap: 0;
     > h1 {
       position: relative;
       transform: none;
@@ -82,6 +82,9 @@ const CardsContainer = styled.div`
   }
   @media (max-width: 970px) {
     flex-direction: column;
+  }
+  @media (max-width: 300px) {
+    padding: 2rem 2px;
   }
 `;
 

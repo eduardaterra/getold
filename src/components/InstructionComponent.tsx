@@ -51,7 +51,7 @@ const InstructionContainer = styled.div`
   }
   @media (max-width: 1400px) {
     width: 15rem;
-    height: 24rem;
+    height: 22rem;
     margin-top: 0;
     > p {
       margin-top: 3rem;

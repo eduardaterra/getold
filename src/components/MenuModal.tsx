@@ -25,9 +25,54 @@ const MenuModal = (props: propsType) => {
           X
         </CloseButton>
         <LinksContainer>
-          <ScrollLink to="inicio">início</ScrollLink>
-          <ScrollLink to="sobre">sobre</ScrollLink>
-          <ScrollLink to="como-utilizar">como utilizar</ScrollLink>
+          <ScrollLink
+            to="inicio"
+            activeClass="active"
+            smooth={true}
+            duration={500}
+            spy={true}
+            offset={-80}
+            onClick={() => {
+              setSlide("slide-out");
+              setTimeout(() => {
+                setShowModal(false);
+              }, 300);
+            }}
+          >
+            início
+          </ScrollLink>
+          <ScrollLink
+            to="sobre"
+            activeClass="active"
+            smooth={true}
+            duration={500}
+            spy={true}
+            offset={-80}
+            onClick={() => {
+              setSlide("slide-out");
+              setTimeout(() => {
+                setShowModal(false);
+              }, 300);
+            }}
+          >
+            sobre
+          </ScrollLink>
+          <ScrollLink
+            to="como-utilizar"
+            activeClass="active"
+            smooth={true}
+            duration={500}
+            spy={true}
+            offset={-80}
+            onClick={() => {
+              setSlide("slide-out");
+              setTimeout(() => {
+                setShowModal(false);
+              }, 300);
+            }}
+          >
+            como utilizar
+          </ScrollLink>
         </LinksContainer>
         <Button>simulador</Button>
       </MenuContainer>
