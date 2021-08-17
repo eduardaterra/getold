@@ -1,13 +1,18 @@
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Home from "./pages/Home";
+import Form from "./pages/Form";
+import { HeaderProvider } from "./contexts/HeaderContext";
 
 function App() {
   return (
     <>
       <BrowserRouter>
-        <Switch>
-          <Route path="/" component={Home} />
-        </Switch>
+        <HeaderProvider>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/form" component={Form} />
+          </Switch>
+        </HeaderProvider>
       </BrowserRouter>
     </>
   );

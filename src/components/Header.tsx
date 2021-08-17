@@ -1,18 +1,21 @@
 import styled from "styled-components";
+import { useHistory } from "react-router-dom";
 import { Link as ScrollLink, animateScroll } from "react-scroll";
-
 import Menu from "../assets/menu.svg";
 
 type propsType = {
   setShowModal: (value: boolean) => void;
   setSlide: (value: string) => void;
+  display: boolean;
 };
 
 const Header = (props: propsType) => {
-  const { setShowModal, setSlide } = props;
+  const { setShowModal, setSlide, display } = props;
+  const history = useHistory();
+
   return (
     <>
-      <HeaderContainer>
+      <HeaderContainer display={display}>
         <ScrollLink
           activeClass="active"
           to="/"
@@ -22,19 +25,21 @@ const Header = (props: propsType) => {
           offset={-80}
           onClick={() => {
             animateScroll.scrollToTop();
+            history.push("/");
           }}
         >
           get<strong>old</strong>
         </ScrollLink>
         <MobileMenuIcon
           src={Menu}
+          display={display}
           onClick={() => {
             setShowModal(true);
             setSlide("slide-in");
           }}
         />
 
-        <MenuContainer>
+        <MenuContainer display={display}>
           <ScrollLink
             to="inicio"
             activeClass="active"
@@ -66,19 +71,27 @@ const Header = (props: propsType) => {
             como utilizar
           </ScrollLink>
         </MenuContainer>
-        <Button>simulador</Button>
+        <Button
+          display={display}
+          onClick={() => {
+            history.push("/form");
+          }}
+        >
+          simulador
+        </Button>
       </HeaderContainer>
     </>
   );
 };
 
-const HeaderContainer = styled.div`
+const HeaderContainer = styled.div<Pick<propsType, "display">>`
   background: black;
   position: sticky;
   top: 0;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: ${({ display }) =>
+    display === true ? "space-between" : "center"};
   height: 5rem;
   width: 100%;
   z-index: 1;
@@ -103,7 +116,7 @@ const HeaderContainer = styled.div`
     }
   }
 `;
-const MobileMenuIcon = styled.img`
+const MobileMenuIcon = styled.img<Pick<propsType, "display">>`
   display: none;
   width: 1.8rem;
   @media (max-width: 758px) {
@@ -116,8 +129,8 @@ const MobileMenuIcon = styled.img`
   }
 `;
 
-const MenuContainer = styled.ul`
-  display: flex;
+const MenuContainer = styled.ul<Pick<propsType, "display">>`
+  display: ${({ display }) => (display ? "flex" : "none")};
   align-items: center;
   justify-content: center;
   list-style: none;
@@ -147,7 +160,8 @@ const MenuContainer = styled.ul`
     display: none;
   }
 `;
-const Button = styled.button`
+const Button = styled.button<Pick<propsType, "display">>`
+  display: ${({ display }) => (display ? "inline" : "none")};
   background: var(--purple);
   border: none;
   border-radius: 3rem;
@@ -159,6 +173,7 @@ const Button = styled.button`
   :hover {
     background: white;
     color: var(--purple);
+    border: 1px solid var(--purple);
   }
   @media (max-width: 758px) {
     display: none;
