@@ -9,8 +9,7 @@ type propsType = {
   display: boolean;
 };
 
-const Header = (props: propsType) => {
-  const { setShowModal, setSlide, display } = props;
+const Header = ({ setShowModal, setSlide, display }: propsType) => {
   const history = useHistory();
 
   return (
@@ -120,7 +119,7 @@ const MobileMenuIcon = styled.img<Pick<propsType, "display">>`
   display: none;
   width: 1.8rem;
   @media (max-width: 758px) {
-    display: block;
+    display: ${({ display }) => (display ? "block" : "none")};
     cursor: pointer;
     position: absolute;
     top: 0;

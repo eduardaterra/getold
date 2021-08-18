@@ -87,6 +87,14 @@ const FormContainer = styled.div`
   background: var(--light-gray);
   max-width: 100vw;
   min-height: 90.3vh;
+  @media (max-width: 1024px) {
+    margin-top: -5rem;
+    min-height: 100vh;
+  }
+  @media (max-width: 540px) {
+    margin-top: 0;
+    padding: 2rem 0;
+  }
 `;
 
 const InfoForm = styled.div`
@@ -97,6 +105,9 @@ const InfoForm = styled.div`
   > h3 {
     font: bold italic 1.3rem "Ubuntu", sans-serif;
     color: var(--purple);
+    @media (max-width: 758px) {
+      font-size: 1rem;
+    }
   }
 `;
 
@@ -135,13 +146,51 @@ const InputContainer = styled.div`
       }
     }
   }
+  @media (max-width: 1024px) {
+    width: 40rem;
+    > div {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+  @media (max-width: 758px) {
+    width: 30rem;
+    > div {
+      > div {
+        display: flex;
+        align-items: center;
+        > label {
+          font: 500 0.8rem "Ubuntu", sans-serif;
+          display: flex;
+          align-items: center;
+        }
+        > input {
+          font-size: 0.8rem;
+          height: 2rem;
+        }
+      }
+    }
+  }
+  @media (max-width: 500px) {
+    width: 20rem;
+  }
+  @media (max-width: 340px) {
+    width: 16rem;
+    padding: 1rem;
+    > div {
+      > div {
+        > input {
+          max-width: 7.5rem;
+        }
+      }
+    }
+  }
 `;
 
 const SendButton = styled.button`
   background: var(--purple);
   border: none;
   border-radius: 3rem;
-  margin-left: 62rem;
   color: white;
   font: bold italic 1.4rem "Ubuntu", sans-serif;
   padding: 0.5rem 1.5rem;
@@ -151,6 +200,8 @@ const SendButton = styled.button`
     background: white;
     color: var(--purple);
     border: 1px solid var(--purple);
+  }
+  @media (max-width: 1024px) {
   }
 `;
 
