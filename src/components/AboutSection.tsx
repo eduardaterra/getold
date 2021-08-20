@@ -13,11 +13,12 @@ const AboutSection = () => {
         <Logo>
           get<strong>old</strong>
         </Logo>{" "}
-        é um Simulador de Aposentadoria rápido que vai te ajudar a ter um valor
-        estimado do quanto você precisa <strong>guardar e investir</strong> para
-        ter a <strong>renda mensal</strong> desejada sem que seu dinheiro acabe
-        por <strong>100 anos</strong>! Lembrando que o mercado sempre está
-        sujeito a oscilações e mudanças, então o simulador não é preciso.
+        é um Simulador de Aposentadoria rápido que vai te ajudar a alcançar sua
+        independência financeira. Tenha um valor estimado do quanto você precisa{" "}
+        <strong>guardar e investir</strong> para ter a{" "}
+        <strong>renda mensal</strong> desejada sem que seu dinheiro acabe{" "}
+        <strong>algum dia</strong>! Lembrando que o mercado sempre está sujeito
+        a oscilações e mudanças, então o simulador não é preciso.
         <br />
         <br /> Além disso, também é calculado o quanto você precisa guardar
         mensalmente para chegar lá com base na sua idade atual até a idade

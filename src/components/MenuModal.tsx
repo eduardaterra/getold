@@ -1,3 +1,4 @@
+import { useHistory } from "react-router-dom";
 import { Link as ScrollLink } from "react-scroll";
 import styled from "styled-components";
 
@@ -10,6 +11,7 @@ type propsType = {
 
 const MenuModal = (props: propsType) => {
   const { showModal, setShowModal, slide, setSlide } = props;
+  const history = useHistory();
 
   return showModal ? (
     <>
@@ -74,7 +76,17 @@ const MenuModal = (props: propsType) => {
             como utilizar
           </ScrollLink>
         </LinksContainer>
-        <Button>simulador</Button>
+        <Button
+          onClick={() => {
+            history.push("/form");
+            setSlide("slide-out");
+            setTimeout(() => {
+              setShowModal(false);
+            }, 300);
+          }}
+        >
+          simulador
+        </Button>
       </MenuContainer>
     </>
   ) : null;

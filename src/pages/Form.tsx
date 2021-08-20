@@ -37,11 +37,17 @@ const Form = () => {
               <div>
                 <div>
                   <label>idade atual:</label>
-                  <input type="number" min="0" max="100" />
+                  <input required type="number" min="0" max="100" />
                 </div>
 
                 <div>
                   <label>valor guardado:</label>
+                  <label>R$</label>
+                  <MonetaryInput />
+                </div>
+
+                <div>
+                  <label>aportes mensais:</label>
                   <label>R$</label>
                   <MonetaryInput />
                 </div>
@@ -54,18 +60,18 @@ const Form = () => {
               <div>
                 <div>
                   <label>idade para aposentar:</label>
-                  <input type="number" min="0" max="100" />
+                  <input required type="number" min="0" max="100" />
                 </div>
                 <div>
                   <label>gastos mensais desejados:</label>
                   <label>R$</label>
-                  <MonetaryInput />
+                  <MonetaryInput required />
                 </div>
               </div>
               <div>
                 <div>
                   <label>percentual de rentabilidade anual estimada:</label>
-                  <input type="number" min="0" max="100" step="0.1" />
+                  <input required type="number" min="0" max="100" step="0.1" />
                   <label>%</label>
                 </div>
               </div>
