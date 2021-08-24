@@ -13,7 +13,7 @@ const AboutSection = () => {
         <Logo>
           get<strong>old</strong>
         </Logo>{" "}
-        é um Simulador de Aposentadoria rápido que vai te ajudar a alcançar sua
+        é um Simulador de Aposentadoria que vai te ajudar a alcançar sua
         independência financeira. Tenha um valor estimado do quanto você precisa{" "}
         <strong>guardar e investir</strong> para ter a{" "}
         <strong>renda mensal</strong> desejada sem que seu dinheiro acabe{" "}

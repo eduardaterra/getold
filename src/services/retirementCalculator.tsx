@@ -1,4 +1,11 @@
-import { ClientInfo } from "../contexts/ClientInfoContext";
+export type ClientInfo = {
+  currentAge: number;
+  savedMoney: number;
+  retirementAge: number;
+  monthlyExpenses: number;
+  profitPercentage: number;
+  contribution: number;
+};
 
 type CalculatedRetirement = {
   currentSavedMoneyDuration: string | null;
@@ -40,12 +47,14 @@ const retirementCalculator = ({
       ? null
       : years > 0
       ? monthsExceeded > 0
-        ? `Se você aposentar com a quantia que tem atualmente, seu patrimônio irá durar por ${years} anos e ${monthsExceeded} meses.`
-        : `Se você aposentar com a quantia que tem atualmente, seu patrimônio irá durar por ${years} anos.`
-      : `Se você aposentar com a quantia que tem atualmente, seu patrimônio irá durar por ${
-          monthsExceeded > 1
-            ? monthsExceeded + " meses"
-            : monthsExceeded + " mês"
+        ? `Se você aposentar com a quantia que tem atualmente, conseguirá se manter por ${years} anos e ${
+            monthsExceeded > 1
+              ? monthsExceeded + " meses"
+              : monthsExceeded + " mês"
+          }.`
+        : `Se você aposentar com a quantia que tem atualmente, conseguirá se manter por ${years} anos.`
+      : `Se você aposentar com a quantia que tem atualmente, conseguirá se manter por ${
+          months > 1 ? months + " meses" : months + " mês"
         }.`;
   };
 

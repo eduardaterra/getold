@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { createContext } from "react";
 
-export type ClientInfo = {
+type ClientInfo = {
   currentAge: number;
   savedMoney: number;
   retirementAge: number;
@@ -15,9 +15,9 @@ type RetirementInfo = {
   setRetirement: (value: ClientInfo) => void;
 };
 
-const ClientInfoContext = createContext({} as RetirementInfo);
+const RetirementContext = createContext({} as RetirementInfo);
 
-export const ClientInfoProvider: React.FC = ({ children }) => {
+export const RetirementProvider: React.FC = ({ children }) => {
   const [retirement, setRetirement] = useState<ClientInfo>({
     currentAge: 0,
     savedMoney: 0,
@@ -28,10 +28,15 @@ export const ClientInfoProvider: React.FC = ({ children }) => {
   });
 
   return (
-    <ClientInfoContext.Provider value={{ retirement, setRetirement }}>
+    <RetirementContext.Provider
+      value={{
+        retirement,
+        setRetirement,
+      }}
+    >
       {children}
-    </ClientInfoContext.Provider>
+    </RetirementContext.Provider>
   );
 };
 
-export default ClientInfoContext;
+export default RetirementContext;

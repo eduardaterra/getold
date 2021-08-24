@@ -18,10 +18,10 @@ const InstructionsSection = () => {
           <p>
             Informe sua <strong>idade para aposentar</strong>,{" "}
             <strong>gastos mensais desejados</strong> e{" "}
-            <strong>percentual de rentabilidade anual estimada</strong>. Para
-            determinar o percentual, recomendamos que considere as informações
-            de acordo com seu perfil de investidor e consulte indicadores para
-            ter noção do cenário econômico.
+            <strong>rentabilidade anual estimada</strong>. Para determinar o
+            percentual, recomendamos que considere as informações de acordo com
+            seu perfil de investidor e consulte indicadores para ter noção do
+            cenário econômico.
           </p>
         </InstructionComponent>
         <InstructionComponent position="3º">

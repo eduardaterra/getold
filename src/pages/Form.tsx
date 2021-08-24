@@ -1,14 +1,18 @@
-import { useEffect } from "react";
-import { useContext } from "react";
+import { useEffect, useContext } from "react";
 import styled from "styled-components";
 
 import Header from "../components/Header";
 import MenuModal from "../components/MenuModal";
 import MonetaryInput from "../components/MonetaryInput";
+import PercentageInput from "../components/PercentageInput";
 
 import HeaderContext from "../contexts/HeaderContext";
+import useFormValidation from "../hooks/useformValidation";
 
 const Form = () => {
+  const { handleChange, errorsList, values, validate, formIsValid } =
+    useFormValidation();
+
   const { showModal, setShowModal, slide, setSlide, display, setDisplay } =
     useContext(HeaderContext);
 
@@ -29,28 +33,50 @@ const Form = () => {
         setSlide={setSlide}
         display={display}
       />
-      <form>
-        <FormContainer>
+
+      <FormContainer>
+        <form
+          onSubmit={(event) => {
+            event.preventDefault();
+            validate(values);
+          }}
+        >
           <InfoForm>
             <h3>Suas Informações</h3>
             <InputContainer>
               <div>
-                <div>
-                  <label>idade atual:</label>
-                  <input required type="number" min="0" max="100" />
-                </div>
+                <fieldset>
+                  <label>* idade atual :</label>
+                  <input
+                    required
+                    type="number"
+                    min="0"
+                    max="100"
+                    onChange={handleChange}
+                    name="currentAge"
+                    className={errorsList.currentAge}
+                  />
+                </fieldset>
 
-                <div>
+                <fieldset>
                   <label>valor guardado:</label>
                   <label>R$</label>
-                  <MonetaryInput />
-                </div>
+                  <MonetaryInput
+                    onChange={handleChange}
+                    name="savedMoney"
+                    className={errorsList.savedMoney}
+                  />
+                </fieldset>
 
-                <div>
+                <fieldset>
                   <label>aportes mensais:</label>
                   <label>R$</label>
-                  <MonetaryInput />
-                </div>
+                  <MonetaryInput
+                    onChange={handleChange}
+                    name="contribution"
+                    className={errorsList.contribution}
+                  />
+                </fieldset>
               </div>
             </InputContainer>
           </InfoForm>
@@ -58,48 +84,84 @@ const Form = () => {
             <h3>Aposentadoria</h3>
             <InputContainer>
               <div>
-                <div>
-                  <label>idade para aposentar:</label>
-                  <input required type="number" min="0" max="100" />
-                </div>
-                <div>
-                  <label>gastos mensais desejados:</label>
+                <fieldset>
+                  <label>* idade para aposentar :</label>
+                  <input
+                    required
+                    type="number"
+                    min="0"
+                    max="100"
+                    onChange={handleChange}
+                    name="retirementAge"
+                    className={errorsList.retirementAge}
+                  />
+                </fieldset>
+                <fieldset>
+                  <label>* gastos mensais desejados :</label>
                   <label>R$</label>
-                  <MonetaryInput required />
-                </div>
+                  <MonetaryInput
+                    required
+                    onChange={handleChange}
+                    name="monthlyExpenses"
+                    className={errorsList.monthlyExpenses}
+                  />
+                </fieldset>
               </div>
               <div>
-                <div>
-                  <label>percentual de rentabilidade anual estimada:</label>
-                  <input required type="number" min="0" max="100" step="0.1" />
+                <fieldset>
+                  <label>* rentabilidade anual estimada :</label>
+                  <PercentageInput
+                    required
+                    type="number"
+                    min="0"
+                    max="100"
+                    step="0.1"
+                    onChange={handleChange}
+                    name="profitPercentage"
+                    className={errorsList.profitPercentage}
+                  />
                   <label>%</label>
-                </div>
+                </fieldset>
               </div>
             </InputContainer>
           </InfoForm>
-          <SendButton>Enviar</SendButton>
-        </FormContainer>
-      </form>
+          <span>* valores obrigatórios</span>
+          {formIsValid ? null : (
+            <ErrorH3>
+              Por favor, insira dados válidos nos espaços obrigatórios.
+            </ErrorH3>
+          )}
+          <SendButton type="submit" value="Submit">
+            Enviar
+          </SendButton>
+        </form>
+      </FormContainer>
     </>
   );
 };
 
 const FormContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  align-items: center;
-  justify-content: center;
-  background: var(--light-gray);
-  max-width: 100vw;
-  min-height: 90.3vh;
-  @media (max-width: 1024px) {
-    margin-top: -5rem;
-    min-height: 100vh;
-  }
-  @media (max-width: 540px) {
-    margin-top: 0;
-    padding: 2rem 0;
+  > form {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+    background: var(--light-gray);
+    max-width: 100vw;
+    min-height: 90.3vh;
+
+    > span {
+      font: 500 0.7rem "Ubuntu", sans-serif;
+    }
+    @media (max-width: 1024px) {
+      margin-top: -5rem;
+      min-height: 100vh;
+    }
+    @media (max-width: 540px) {
+      margin-top: 0;
+      padding: 2rem 0;
+    }
   }
 `;
 
@@ -133,14 +195,18 @@ const InputContainer = styled.div`
     align-items: center;
     justify-content: center;
     gap: 3rem;
-    > div {
+    > fieldset {
+      border: none;
       display: flex;
-      gap: 1rem;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
       > label {
         font: 500 1.2rem "Ubuntu", sans-serif;
       }
       > input {
         border-radius: 3rem;
+        height: 2rem;
         border: none;
         padding: 0.1rem;
         font: 500 1rem "Ubuntu", sans-serif;
@@ -148,6 +214,9 @@ const InputContainer = styled.div`
         &::placeholder {
           color: var(--light-gray);
           font: 500 0.3rem "Ubuntu", sans-serif;
+        }
+        &.error {
+          border: 2px solid #ff0000;
         }
       }
     }
@@ -160,9 +229,10 @@ const InputContainer = styled.div`
     }
   }
   @media (max-width: 758px) {
+    padding: 1rem;
     width: 30rem;
     > div {
-      > div {
+      > fieldset {
         display: flex;
         align-items: center;
         > label {
@@ -182,15 +252,20 @@ const InputContainer = styled.div`
   }
   @media (max-width: 340px) {
     width: 16rem;
-    padding: 1rem;
+
     > div {
-      > div {
+      > fieldset {
         > input {
           max-width: 7.5rem;
         }
       }
     }
   }
+`;
+
+const ErrorH3 = styled.h3`
+  font: bold italic 0.8rem "Ubuntu", sans-serif;
+  color: #ff0000;
 `;
 
 const SendButton = styled.button`
