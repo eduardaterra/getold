@@ -3,12 +3,11 @@ import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 
 import Header from "../components/Header";
-import MenuModal from "../components/MenuModal";
 import MonetaryInput from "../components/MonetaryInput";
 import PercentageInput from "../components/PercentageInput";
 
+import FormValidationContext from "../contexts/FormValidationContext";
 import HeaderContext from "../contexts/HeaderContext";
-import useFormValidation from "../hooks/useformValidation";
 
 const Form = () => {
   const {
@@ -18,9 +17,9 @@ const Form = () => {
     validate,
     isFormValid,
     isFormReady,
-  } = useFormValidation();
+  } = useContext(FormValidationContext);
 
-  const { showModal, setShowModal, slide, setSlide, display, setDisplay } =
+  const { setShowModal, setSlide, display, setDisplay } =
     useContext(HeaderContext);
 
   const history = useHistory();
@@ -31,12 +30,6 @@ const Form = () => {
 
   return (
     <>
-      <MenuModal
-        showModal={showModal}
-        setShowModal={setShowModal}
-        slide={slide}
-        setSlide={setSlide}
-      />
       <Header
         setShowModal={setShowModal}
         setSlide={setSlide}
@@ -47,7 +40,7 @@ const Form = () => {
         <form
           onSubmit={(event) => {
             event.preventDefault();
-            history.push(isFormReady ? "/" : "/form");
+            history.push(isFormReady ? "/result" : "/form");
           }}
         >
           <InfoForm>

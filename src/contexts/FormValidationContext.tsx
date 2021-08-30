@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { createContext } from "react";
 import { ClientInfo } from "../services/retirementCalculator";
 
 type validation = {
@@ -19,7 +20,9 @@ type errorsListType = {
   contribution?: string;
 };
 
-const useFormValidation = (): validation => {
+const FormValidationContext = createContext({} as validation);
+
+export const FormValidationProvider: React.FC = ({ children }) => {
   const [values, setValues] = useState({} as ClientInfo);
   const [errorsList, setErrorsList] = useState({} as errorsListType);
   const [isFormValid, setIsFormValid] = useState(true);
@@ -84,14 +87,20 @@ const useFormValidation = (): validation => {
     setIsFormReady(isValid);
   };
 
-  return {
-    handleChange,
-    values,
-    errorsList,
-    validate,
-    isFormValid,
-    isFormReady,
-  };
+  return (
+    <FormValidationContext.Provider
+      value={{
+        handleChange,
+        values,
+        errorsList,
+        validate,
+        isFormValid,
+        isFormReady,
+      }}
+    >
+      {children}
+    </FormValidationContext.Provider>
+  );
 };
 
-export default useFormValidation;
+export default FormValidationContext;
