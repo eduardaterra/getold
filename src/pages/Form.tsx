@@ -2,9 +2,9 @@ import { useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 
-import Header from "../components/Header";
-import MonetaryInput from "../components/MonetaryInput";
-import PercentageInput from "../components/PercentageInput";
+import Header from "../components/header/Header";
+import MonetaryInput from "../components/form/MonetaryInput";
+import PercentageInput from "../components/form/PercentageInput";
 
 import FormValidationContext from "../contexts/FormValidationContext";
 import HeaderContext from "../contexts/HeaderContext";

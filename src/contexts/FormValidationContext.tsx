@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { createContext } from "react";
-import { ClientInfo } from "../services/retirementCalculator";
+import { ClientInfo } from "../hooks/useRetirementCalculator";
 
 type validation = {
   handleChange: (value: React.FormEvent<HTMLInputElement>) => void;

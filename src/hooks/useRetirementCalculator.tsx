@@ -14,7 +14,7 @@ type CalculatedRetirement = {
   timeUntilRetirement: number;
 };
 
-const retirementCalculator = ({
+const useRetirementCalculator = ({
   currentAge,
   retirementAge,
   savedMoney,
@@ -73,4 +73,4 @@ const retirementCalculator = ({
   };
 };
 
-export default retirementCalculator;
+export default useRetirementCalculator;

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Pig from "../assets/pig.svg";
+import Pig from "../../assets/pig.svg";
 
 const AboutSection = () => {
   return (
@@ -13,9 +13,9 @@ const AboutSection = () => {
         <Logo>
           get<strong>old</strong>
         </Logo>{" "}
-        é um Simulador de Aposentadoria que vai te ajudar a alcançar sua
-        independência financeira. Tenha um valor estimado do quanto você precisa{" "}
-        <strong>guardar e investir</strong> para ter a{" "}
+        é um Simulador de Aposentadoria que vai te ajudar a alcançar sua{" "}
+        <strong>independência financeira</strong>. Tenha um valor estimado do
+        quanto você precisa <strong>guardar e investir</strong> para ter a{" "}
         <strong>renda mensal</strong> desejada sem que seu dinheiro acabe{" "}
         <strong>algum dia</strong>! Lembrando que o mercado sempre está sujeito
         a oscilações e mudanças, então o simulador não é preciso.

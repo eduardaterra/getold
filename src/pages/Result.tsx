@@ -1,5 +1,7 @@
 import { useEffect, useContext } from "react";
-import Header from "../components/Header";
+import styled from "styled-components";
+import Header from "../components/header/Header";
+import UnsentFormResult from "../components/result/UnsentFormResult";
 import FormValidationContext from "../contexts/FormValidationContext";
 import HeaderContext from "../contexts/HeaderContext";
 
@@ -11,7 +13,6 @@ const Result: React.FC = () => {
 
   useEffect(() => {
     setDisplay(false);
-    console.log(isFormReady);
   }, []);
 
   return (
@@ -21,10 +22,19 @@ const Result: React.FC = () => {
         setSlide={setSlide}
         display={display}
       ></Header>
-
-      {isFormReady ? <h1>form is ready</h1> : <h1>form is not ready</h1>}
+      <ResultContainer>
+        {isFormReady ? <h1>form is ready</h1> : <UnsentFormResult />}
+      </ResultContainer>
     </>
   );
 };
 
+const ResultContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100vw;
+  min-height: 90.3vh;
+  background-color: black;
+`;
 export default Result;

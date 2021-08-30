@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import { Link as ScrollLink, animateScroll } from "react-scroll";
-import Menu from "../assets/menu.svg";
+import Menu from "../../assets/menu.svg";
 
 type propsType = {
   setShowModal: (value: boolean) => void;

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Seniors from "../assets/seniors.svg";
+import Seniors from "../../assets/seniors.svg";
 
 const InitialSection = () => {
   return (
