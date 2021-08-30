@@ -1,4 +1,5 @@
 import { useEffect, useContext } from "react";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 
 import Header from "../components/Header";
@@ -10,11 +11,19 @@ import HeaderContext from "../contexts/HeaderContext";
 import useFormValidation from "../hooks/useformValidation";
 
 const Form = () => {
-  const { handleChange, errorsList, values, validate, formIsValid } =
-    useFormValidation();
+  const {
+    handleChange,
+    errorsList,
+    values,
+    validate,
+    isFormValid,
+    isFormReady,
+  } = useFormValidation();
 
   const { showModal, setShowModal, slide, setSlide, display, setDisplay } =
     useContext(HeaderContext);
+
+  const history = useHistory();
 
   useEffect(() => {
     setDisplay(false);
@@ -38,7 +47,7 @@ const Form = () => {
         <form
           onSubmit={(event) => {
             event.preventDefault();
-            validate(values);
+            history.push(isFormReady ? "/" : "/form");
           }}
         >
           <InfoForm>
@@ -115,7 +124,7 @@ const Form = () => {
                     type="number"
                     min="0"
                     max="100"
-                    step="0.1"
+                    step="0.01"
                     onChange={handleChange}
                     name="profitPercentage"
                     className={errorsList.profitPercentage}
@@ -126,12 +135,18 @@ const Form = () => {
             </InputContainer>
           </InfoForm>
           <span>* valores obrigatórios</span>
-          {formIsValid ? null : (
+          {isFormValid ? null : (
             <ErrorH3>
               Por favor, insira dados válidos nos espaços obrigatórios.
             </ErrorH3>
           )}
-          <SendButton type="submit" value="Submit">
+          <SendButton
+            type="submit"
+            value="Submit"
+            onClick={() => {
+              validate(values);
+            }}
+          >
             Enviar
           </SendButton>
         </form>

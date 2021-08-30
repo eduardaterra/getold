@@ -1,7 +1,9 @@
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import InstructionComponent from "./InstructionComponent";
 
 const InstructionsSection = () => {
+  const history = useHistory();
   return (
     <InstructionsContainer>
       <h1>Como Utilizar</h1>
@@ -33,7 +35,13 @@ const InstructionsSection = () => {
           </p>
         </InstructionComponent>
       </CardsContainer>
-      <Button>Simular Agora</Button>
+      <Button
+        onClick={() => {
+          history.push("/form");
+        }}
+      >
+        Simular Agora
+      </Button>
     </InstructionsContainer>
   );
 };

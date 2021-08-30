@@ -6,7 +6,8 @@ type validation = {
   values: ClientInfo;
   errorsList: errorsListType;
   validate: (value: ClientInfo) => void;
-  formIsValid: boolean;
+  isFormValid: boolean;
+  isFormReady: boolean;
 };
 
 type errorsListType = {
@@ -21,7 +22,8 @@ type errorsListType = {
 const useFormValidation = (): validation => {
   const [values, setValues] = useState({} as ClientInfo);
   const [errorsList, setErrorsList] = useState({} as errorsListType);
-  const [formIsValid, setFormIsValid] = useState(true);
+  const [isFormValid, setIsFormValid] = useState(true);
+  let [isFormReady, setIsFormReady] = useState(false);
 
   const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
     const fieldname = event.currentTarget.getAttribute("name");
@@ -78,10 +80,18 @@ const useFormValidation = (): validation => {
     }
 
     setErrorsList(errors);
-    setFormIsValid(isValid);
+    setIsFormValid(isValid);
+    setIsFormReady(isValid);
   };
 
-  return { handleChange, values, errorsList, validate, formIsValid };
+  return {
+    handleChange,
+    values,
+    errorsList,
+    validate,
+    isFormValid,
+    isFormReady,
+  };
 };
 
 export default useFormValidation;
