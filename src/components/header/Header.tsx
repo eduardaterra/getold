@@ -1,7 +1,10 @@
+import { useContext } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import { Link as ScrollLink, animateScroll } from "react-scroll";
 import Menu from "../../assets/menu.svg";
+import FormValidationContext from "../../contexts/FormValidationContext";
+import { ClientInfo } from "../../hooks/useRetirementCalculator";
 
 type propsType = {
   setShowModal: (value: boolean) => void;
@@ -10,6 +13,7 @@ type propsType = {
 };
 
 const Header = ({ setShowModal, setSlide, display }: propsType) => {
+  const { setValues } = useContext(FormValidationContext);
   const history = useHistory();
 
   return (
@@ -25,6 +29,7 @@ const Header = ({ setShowModal, setSlide, display }: propsType) => {
           onClick={() => {
             animateScroll.scrollToTop();
             history.push("/");
+            setValues({} as ClientInfo);
           }}
         >
           get<strong>old</strong>

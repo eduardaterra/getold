@@ -1,39 +1,43 @@
 export type ClientInfo = {
   currentAge: number;
-  savedMoney: number;
   retirementAge: number;
   monthlyExpenses: number;
   profitPercentage: number;
-  contribution: number;
+  savedMoney: number | undefined;
 };
 
 type CalculatedRetirement = {
-  currentSavedMoneyDuration: string | null;
+  savedMoneyDuration: SavedMoneyDurationType;
   savedMoneyNeeded: number;
-  monthsSavingMoneyNeeded: number;
+  monthlySavedMoneyNeeded: number;
   timeUntilRetirement: number;
 };
 
+type SavedMoneyDurationType = {
+  year: number;
+  month: number;
+  monthExceeded: number;
+};
+
 const useRetirementCalculator = ({
-  currentAge,
-  retirementAge,
-  savedMoney,
-  monthlyExpenses,
-  profitPercentage,
-  contribution,
+  ...values
 }: ClientInfo): CalculatedRetirement => {
+  const {
+    currentAge,
+    savedMoney,
+    retirementAge,
+    monthlyExpenses,
+    profitPercentage,
+  } = values;
+
+  const newSavedMoney = savedMoney === undefined ? 0 : savedMoney;
+
   const monthlyProfitPercentage =
     Math.pow(1 + profitPercentage / 100, 1 / 12) - 1;
-  const savedMoneyNeeded =
-    monthlyExpenses / Number(monthlyProfitPercentage.toFixed(3));
 
-  let monthsSavingMoneyNeeded = 0;
-  while (savedMoney < savedMoneyNeeded) {
-    monthsSavingMoneyNeeded++;
-    savedMoney +=
-      contribution +
-      (savedMoney * Number(monthlyProfitPercentage.toFixed(3))) / 100;
-  }
+  const savedMoneyNeeded = Math.round(
+    monthlyExpenses / Number(monthlyProfitPercentage.toFixed(3))
+  );
 
   const savedMoneyDurationCalculator = (
     savedMoney: number,
@@ -41,34 +45,32 @@ const useRetirementCalculator = ({
   ) => {
     const months = Math.floor(savedMoney / monthlyExpenses);
     const years = Math.floor(months / 12);
-    const monthsExceeded = years % 12;
+    const monthsExceeded = months - years * 12;
 
-    return monthlyExpenses > savedMoney
-      ? null
-      : years > 0
-      ? monthsExceeded > 0
-        ? `Se você aposentar com a quantia que tem atualmente, conseguirá se manter por ${years} anos e ${
-            monthsExceeded > 1
-              ? monthsExceeded + " meses"
-              : monthsExceeded + " mês"
-          }.`
-        : `Se você aposentar com a quantia que tem atualmente, conseguirá se manter por ${years} anos.`
-      : `Se você aposentar com a quantia que tem atualmente, conseguirá se manter por ${
-          months > 1 ? months + " meses" : months + " mês"
-        }.`;
+    return {
+      year: years,
+      month: months,
+      monthExceeded: monthsExceeded,
+    };
   };
 
-  const currentSavedMoneyDuration = savedMoneyDurationCalculator(
-    savedMoney,
+  const savedMoneyDuration = savedMoneyDurationCalculator(
+    newSavedMoney,
     monthlyExpenses
   );
 
   const timeUntilRetirement = retirementAge - currentAge;
 
+  const monthlySavedMoneyNeeded = Math.round(
+    (savedMoneyNeeded / ((1 + monthlyProfitPercentage) * timeUntilRetirement) -
+      newSavedMoney / ((1 + monthlyProfitPercentage) * timeUntilRetirement)) /
+      12
+  );
+
   return {
-    currentSavedMoneyDuration,
+    savedMoneyDuration,
     savedMoneyNeeded,
-    monthsSavingMoneyNeeded,
+    monthlySavedMoneyNeeded,
     timeUntilRetirement,
   };
 };

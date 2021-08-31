@@ -38,8 +38,8 @@ const Form = () => {
 
       <FormContainer>
         <form
-          onSubmit={(event) => {
-            event.preventDefault();
+          onSubmit={(e) => {
+            e.preventDefault();
             history.push(isFormReady ? "/result" : "/form");
           }}
         >
@@ -67,16 +67,6 @@ const Form = () => {
                     onChange={handleChange}
                     name="savedMoney"
                     className={errorsList.savedMoney}
-                  />
-                </fieldset>
-
-                <fieldset>
-                  <label>aportes mensais:</label>
-                  <label>R$</label>
-                  <MonetaryInput
-                    onChange={handleChange}
-                    name="contribution"
-                    className={errorsList.contribution}
                   />
                 </fieldset>
               </div>

@@ -3,7 +3,6 @@ import Home from "./pages/Home";
 import Form from "./pages/Form";
 import Result from "./pages/Result";
 import { HeaderProvider } from "./contexts/HeaderContext";
-import { RetirementProvider } from "./contexts/RetirementContext";
 import { FormValidationProvider } from "./contexts/FormValidationContext";
 
 function App() {
@@ -12,13 +11,11 @@ function App() {
       <BrowserRouter>
         <HeaderProvider>
           <FormValidationProvider>
-            <RetirementProvider>
-              <Switch>
-                <Route exact path="/" component={Home} />
-                <Route exact path="/form" component={Form} />
-                <Route exact path="/result" component={Result} />
-              </Switch>
-            </RetirementProvider>
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/form" component={Form} />
+              <Route exact path="/result" component={Result} />
+            </Switch>
           </FormValidationProvider>
         </HeaderProvider>
       </BrowserRouter>

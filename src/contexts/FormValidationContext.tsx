@@ -5,6 +5,8 @@ import { ClientInfo } from "../hooks/useRetirementCalculator";
 type validation = {
   handleChange: (value: React.FormEvent<HTMLInputElement>) => void;
   values: ClientInfo;
+  setValues: (value: ClientInfo) => void;
+
   errorsList: errorsListType;
   validate: (value: ClientInfo) => void;
   isFormValid: boolean;
@@ -17,7 +19,6 @@ type errorsListType = {
   retirementAge?: string;
   monthlyExpenses?: string;
   profitPercentage?: string;
-  contribution?: string;
 };
 
 const FormValidationContext = createContext({} as validation);
@@ -43,6 +44,7 @@ export const FormValidationProvider: React.FC = ({ children }) => {
 
   const validate = (value: ClientInfo) => {
     const errors: errorsListType = {};
+    const savedMoney = value.savedMoney === undefined ? 0 : value.savedMoney;
     let isValid = true;
     if (
       value.currentAge <= 0 ||
@@ -61,7 +63,7 @@ export const FormValidationProvider: React.FC = ({ children }) => {
       errors.retirementAge = "error";
       isValid = false;
     }
-    if (value.savedMoney < 0) {
+    if (savedMoney < 0) {
       errors.savedMoney = "error";
       isValid = false;
     }
@@ -77,10 +79,6 @@ export const FormValidationProvider: React.FC = ({ children }) => {
       errors.profitPercentage = "error";
       isValid = false;
     }
-    if (value.contribution < 0) {
-      errors.contribution = "error";
-      isValid = false;
-    }
 
     setErrorsList(errors);
     setIsFormValid(isValid);
@@ -92,6 +90,7 @@ export const FormValidationProvider: React.FC = ({ children }) => {
       value={{
         handleChange,
         values,
+        setValues,
         errorsList,
         validate,
         isFormValid,
