@@ -22,7 +22,7 @@ const Result: React.FC = () => {
         setShowModal={setShowModal}
         setSlide={setSlide}
         display={display}
-      ></Header>
+      />
       <ResultContainer>
         {isFormReady ? <ResultScreen /> : <UnsentFormResult />}
       </ResultContainer>

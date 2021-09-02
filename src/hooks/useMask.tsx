@@ -5,6 +5,7 @@ type Masks = {
   handleInputChange: (value: React.FormEvent<HTMLInputElement>) => void;
   monetaryInputMask: (value: React.FormEvent<HTMLInputElement>) => void;
   percentualInputMask: (value: React.FormEvent<HTMLInputElement>) => void;
+  monetaryMask: (value: number) => void;
 };
 
 const useMask = (): Masks => {
@@ -44,6 +45,16 @@ const useMask = (): Masks => {
     return e;
   };
 
-  return { handleInputChange, monetaryInputMask, percentualInputMask };
+  const monetaryMask = (money: number) => {
+    const maskedNumber = money.toLocaleString("es-ES");
+    return maskedNumber;
+  };
+
+  return {
+    handleInputChange,
+    monetaryInputMask,
+    percentualInputMask,
+    monetaryMask,
+  };
 };
 export default useMask;

@@ -16,7 +16,7 @@ const AboutSection = () => {
         é um Simulador de Aposentadoria que vai te ajudar a alcançar sua{" "}
         <strong>independência financeira</strong>. Tenha um valor estimado do
         quanto você precisa <strong>guardar e investir</strong> para ter a{" "}
-        <strong>renda mensal</strong> desejada sem que seu dinheiro acabe{" "}
+        <strong>renda mensal desejada</strong> sem que seu dinheiro acabe{" "}
         <strong>algum dia</strong>! Lembrando que o mercado sempre está sujeito
         a oscilações e mudanças, então o simulador não é preciso.
       </p>

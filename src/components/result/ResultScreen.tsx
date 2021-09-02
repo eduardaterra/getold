@@ -2,8 +2,11 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 import FormValidationContext from "../../contexts/FormValidationContext";
 import useRetirementCalculator from "../../hooks/useRetirementCalculator";
+import useMask from "../../hooks/useMask";
+
 import Growth from "../../assets/growth.svg";
 import Relax from "../../assets/relax.svg";
+
 import SavedMoneyDuration from "./SavedMoneyDuration";
 
 type ContainerProp = {
@@ -23,7 +26,7 @@ const ResultScreen: React.FC = () => {
 
   const { year, month, monthExceeded } = savedMoneyDuration;
 
-  console.log(year, month, monthExceeded);
+  const { monetaryMask } = useMask();
 
   return savedMoneyMonthlyProfit >= values.monthlyExpenses ? (
     <>
@@ -45,7 +48,7 @@ const ResultScreen: React.FC = () => {
       </Container>
       <Container justify="space-between">
         <MoneyNeededContainer>
-          <h1>R$ {savedMoneyNeeded}</h1>
+          <h1>R$ {monetaryMask(savedMoneyNeeded)}</h1>
           <p>é o valor necessário para você se aposentar com tranquilidade!</p>
         </MoneyNeededContainer>
         <TextContainer>
@@ -68,8 +71,9 @@ const ResultScreen: React.FC = () => {
           <ImgContainer>
             <img src={Growth} alt="pessoa prosperando gradativamente" />
             <p>
-              Juntando <strong>R$ {monthlySavedMoneyNeeded}</strong> por mês,
-              você vai conseguir chegar lá!
+              Juntando{" "}
+              <strong>R$ {monetaryMask(monthlySavedMoneyNeeded)}</strong> por
+              mês, você vai conseguir chegar lá!
             </p>
           </ImgContainer>
         ) : null}
