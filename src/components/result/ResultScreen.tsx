@@ -23,9 +23,13 @@ const ResultScreen: React.FC = () => {
 
   const { year, month, monthExceeded } = savedMoneyDuration;
 
+  console.log(year, month, monthExceeded);
+
   return savedMoneyMonthlyProfit >= values.monthlyExpenses ? (
     <>
-      <h1>Resultados</h1>
+      <Container justify="center">
+        <h1>Resultados</h1>
+      </Container>
       <RetiredContainer>
         <img src={Relax} alt="pessoa relaxando" />
         <p>
@@ -36,7 +40,9 @@ const ResultScreen: React.FC = () => {
     </>
   ) : (
     <>
-      <h1>Resultados</h1>
+      <Container justify="center">
+        <h1>Resultados</h1>
+      </Container>
       <Container justify="space-between">
         <MoneyNeededContainer>
           <h1>R$ {savedMoneyNeeded}</h1>
@@ -67,7 +73,7 @@ const ResultScreen: React.FC = () => {
             </p>
           </ImgContainer>
         ) : null}
-        {year === 0 && month === 0 && monthExceeded === 0 ? null : (
+        {values.savedMoney === undefined ? null : (
           <ImgContainer>
             <SavedMoneyDuration />
           </ImgContainer>
@@ -82,7 +88,7 @@ const RetiredContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: -4rem;
+
   gap: 5rem;
   > img {
     width: 12rem;
@@ -122,6 +128,26 @@ const Container = styled.div<Pick<ContainerProp, "justify">>`
   justify-content: ${({ justify }) => justify};
   align-items: center;
   min-width: 80%;
+  > h1 {
+    font: bold italic 2.3rem "Ubuntu", sans-serif;
+    color: var(--purple);
+  }
+  @media (max-width: 1024px) {
+    gap: 3rem;
+  }
+  @media (max-width: 930px) {
+    flex-direction: column;
+    gap: 5rem;
+    > h1 {
+      font-size: 2.1rem;
+      margin-top: 2rem;
+    }
+  }
+  @media (max-width: 500px) {
+    > h1 {
+      font-size: 1.8rem;
+    }
+  }
 `;
 
 const MoneyNeededContainer = styled.div`
@@ -143,6 +169,26 @@ const MoneyNeededContainer = styled.div`
     color: var(--purple);
     text-align: center;
   }
+
+  @media (max-width: 1024px) {
+    width: 26rem;
+    > h1 {
+      font-size: 2.8rem;
+    }
+    > p {
+      font-size: 1.1rem;
+    }
+  }
+  @media (max-width: 500px) {
+    width: 16rem;
+    padding: 1.5rem;
+    > h1 {
+      font-size: 2.3rem;
+    }
+    > p {
+      font-size: 0.8rem;
+    }
+  }
 `;
 
 const TextContainer = styled.div`
@@ -163,6 +209,26 @@ const TextContainer = styled.div`
       color: var(--purple);
     }
   }
+  @media (max-width: 1024px) {
+    width: 26rem;
+    > h1 {
+      font-size: 2.1rem;
+    }
+    > p {
+      font-size: 1.1rem;
+    }
+  }
+  @media (max-width: 500px) {
+    padding: 1rem;
+    width: 17rem;
+    > h1 {
+      font-size: 1.4rem;
+    }
+    > p {
+      font-size: 0.8rem;
+      text-align: center;
+    }
+  }
 `;
 
 const ImgContainer = styled.div`
@@ -181,6 +247,25 @@ const ImgContainer = styled.div`
     color: white;
     > strong {
       color: var(--purple);
+    }
+  }
+  @media (max-width: 1024px) {
+    width: 26rem;
+
+    > p {
+      font-size: 1.1rem;
+    }
+  }
+  @media (max-width: 930px) {
+    margin-bottom: 2rem;
+  }
+  @media (max-width: 500px) {
+    width: 16rem;
+    > img {
+      width: 6rem;
+    }
+    > p {
+      font-size: 0.8rem;
     }
   }
 `;

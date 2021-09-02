@@ -35,16 +35,16 @@ const ResultContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 7rem;
+  gap: 5rem;
   max-width: 100vw;
   min-height: 90.3vh;
   background-color: black;
-  padding-top: 2rem;
-  > h1 {
-    font: bold italic 2.3rem "Ubuntu", sans-serif;
-    color: var(--purple);
-    position: absolute;
-    transform: translateY(-21rem);
+
+  @media (max-width: 1024px) {
+    min-height: 94.3vh;
+  }
+  @media (max-width: 930px) {
+    gap: 5rem;
   }
 `;
 
