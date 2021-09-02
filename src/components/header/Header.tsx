@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import { Link as ScrollLink, animateScroll } from "react-scroll";
 import Menu from "../../assets/menu.svg";
 import FormValidationContext from "../../contexts/FormValidationContext";
-import { ClientInfo } from "../../hooks/useRetirementCalculator";
+import { ClientInfo } from "../../contexts/FormValidationContext";
 
 type propsType = {
   setShowModal: (value: boolean) => void;

@@ -1,100 +1,45 @@
 import React, { useState } from "react";
 import { createContext } from "react";
-import { ClientInfo } from "../hooks/useRetirementCalculator";
+import { ErrorsListType } from "../hooks/useValidate";
 
-type validation = {
-  handleChange: (value: React.FormEvent<HTMLInputElement>) => void;
-  values: ClientInfo;
-  setValues: (value: ClientInfo) => void;
-
-  errorsList: errorsListType;
-  validate: (value: ClientInfo) => void;
-  isFormValid: boolean;
-  isFormReady: boolean;
+export type ClientInfo = {
+  currentAge: number;
+  retirementAge: number;
+  monthlyExpenses: number;
+  profitPercentage: number;
+  savedMoney: number | undefined;
 };
 
-type errorsListType = {
-  currentAge?: string;
-  savedMoney?: string;
-  retirementAge?: string;
-  monthlyExpenses?: string;
-  profitPercentage?: string;
+type validation = {
+  values: ClientInfo;
+  setValues: (value: ClientInfo) => void;
+  errorsList: ErrorsListType;
+  setErrorsList: (value: ErrorsListType) => void;
+  isFormValid: boolean;
+  setIsFormValid: (value: boolean) => void;
+  isFormReady: boolean;
+  setIsFormReady: (value: boolean) => void;
 };
 
 const FormValidationContext = createContext({} as validation);
 
 export const FormValidationProvider: React.FC = ({ children }) => {
   const [values, setValues] = useState({} as ClientInfo);
-  const [errorsList, setErrorsList] = useState({} as errorsListType);
+  const [errorsList, setErrorsList] = useState({} as ErrorsListType);
   const [isFormValid, setIsFormValid] = useState(true);
-  let [isFormReady, setIsFormReady] = useState(false);
-
-  const handleChange = (event: React.FormEvent<HTMLInputElement>) => {
-    const fieldname = event.currentTarget.getAttribute("name");
-    const value = event.currentTarget.value;
-    const newValue = {
-      ...values,
-      [fieldname as string]: Number(
-        value.replace(/\D/g, "").replace(/(\d)(\d{2})$/, "$1.$2")
-      ),
-    };
-
-    setValues(newValue);
-  };
-
-  const validate = (value: ClientInfo) => {
-    const errors: errorsListType = {};
-    const savedMoney = value.savedMoney === undefined ? 0 : value.savedMoney;
-    let isValid = true;
-    if (
-      value.currentAge <= 0 ||
-      value.currentAge >= 100 ||
-      value.currentAge === undefined
-    ) {
-      errors.currentAge = "error";
-      isValid = false;
-    }
-    if (value.currentAge >= value.retirementAge) {
-      errors.currentAge = "error";
-      errors.retirementAge = "error";
-      isValid = false;
-    }
-    if (value.retirementAge < 0 || value.retirementAge === undefined) {
-      errors.retirementAge = "error";
-      isValid = false;
-    }
-    if (savedMoney < 0) {
-      errors.savedMoney = "error";
-      isValid = false;
-    }
-    if (value.monthlyExpenses <= 0 || value.monthlyExpenses === undefined) {
-      errors.monthlyExpenses = "error";
-      isValid = false;
-    }
-    if (
-      value.profitPercentage > 100 ||
-      value.profitPercentage <= 0 ||
-      value.profitPercentage === undefined
-    ) {
-      errors.profitPercentage = "error";
-      isValid = false;
-    }
-
-    setErrorsList(errors);
-    setIsFormValid(isValid);
-    setIsFormReady(isValid);
-  };
+  const [isFormReady, setIsFormReady] = useState(false);
 
   return (
     <FormValidationContext.Provider
       value={{
-        handleChange,
         values,
         setValues,
         errorsList,
-        validate,
+        setErrorsList,
         isFormValid,
+        setIsFormValid,
         isFormReady,
+        setIsFormReady,
       }}
     >
       {children}

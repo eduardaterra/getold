@@ -1,9 +1,9 @@
-export type ClientInfo = {
-  currentAge: number;
-  retirementAge: number;
-  monthlyExpenses: number;
-  profitPercentage: number;
-  savedMoney: number | undefined;
+import { ClientInfo } from "../contexts/FormValidationContext";
+
+type SavedMoneyDurationType = {
+  year: number;
+  month: number;
+  monthExceeded: number;
 };
 
 type CalculatedRetirement = {
@@ -11,12 +11,7 @@ type CalculatedRetirement = {
   savedMoneyNeeded: number;
   monthlySavedMoneyNeeded: number;
   timeUntilRetirement: number;
-};
-
-type SavedMoneyDurationType = {
-  year: number;
-  month: number;
-  monthExceeded: number;
+  savedMoneyMonthlyProfit: number;
 };
 
 const useRetirementCalculator = ({
@@ -36,33 +31,45 @@ const useRetirementCalculator = ({
     Math.pow(1 + profitPercentage / 100, 1 / 12) - 1;
 
   const savedMoneyNeeded = Math.round(
-    monthlyExpenses / Number(monthlyProfitPercentage.toFixed(3))
+    monthlyExpenses / Number(monthlyProfitPercentage.toFixed(4))
   );
 
   const savedMoneyDurationCalculator = (
     savedMoney: number,
-    monthlyExpenses: number
+    monthlyExpenses: number,
+    monthlyProfit: number
   ) => {
-    const months = Math.floor(savedMoney / monthlyExpenses);
-    const years = Math.floor(months / 12);
-    const monthsExceeded = months - years * 12;
+    let money = savedMoney;
+    let countMonth = 0;
+
+    while (money >= 0) {
+      money -= monthlyExpenses + money * monthlyProfit;
+      countMonth++;
+    }
+
+    const monthCalculation = countMonth;
+    const yearCalculation = Math.floor(monthCalculation / 12);
+    const monthExceededCalculation = monthCalculation - yearCalculation * 12;
 
     return {
-      year: years,
-      month: months,
-      monthExceeded: monthsExceeded,
+      year: yearCalculation,
+      month: monthCalculation,
+      monthExceeded: monthExceededCalculation,
     };
   };
-
   const savedMoneyDuration = savedMoneyDurationCalculator(
     newSavedMoney,
-    monthlyExpenses
+    monthlyExpenses,
+    monthlyProfitPercentage
   );
+
+  const savedMoneyMonthlyProfit = newSavedMoney * monthlyProfitPercentage;
 
   const timeUntilRetirement = retirementAge - currentAge;
 
   const monthlySavedMoneyNeeded = Math.round(
-    (savedMoneyNeeded / ((1 + monthlyProfitPercentage) * timeUntilRetirement) -
+    ((savedMoneyNeeded - newSavedMoney) /
+      ((1 + monthlyProfitPercentage) * timeUntilRetirement) -
       newSavedMoney / ((1 + monthlyProfitPercentage) * timeUntilRetirement)) /
       12
   );
@@ -72,6 +79,7 @@ const useRetirementCalculator = ({
     savedMoneyNeeded,
     monthlySavedMoneyNeeded,
     timeUntilRetirement,
+    savedMoneyMonthlyProfit,
   };
 };
 

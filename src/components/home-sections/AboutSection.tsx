@@ -19,10 +19,6 @@ const AboutSection = () => {
         <strong>renda mensal</strong> desejada sem que seu dinheiro acabe{" "}
         <strong>algum dia</strong>! Lembrando que o mercado sempre está sujeito
         a oscilações e mudanças, então o simulador não é preciso.
-        <br />
-        <br /> Além disso, também é calculado o quanto você precisa guardar
-        mensalmente para chegar lá com base na sua idade atual até a idade
-        desejada para se aposentar.
       </p>
     </AboutContainer>
   );

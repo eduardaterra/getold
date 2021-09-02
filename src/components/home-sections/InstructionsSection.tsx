@@ -10,10 +10,11 @@ const InstructionsSection = () => {
       <CardsContainer>
         <InstructionComponent position="1º">
           <p>
-            Informe sua <strong>idade</strong> e <strong>valor guardado</strong>
-            . Essas informações são necessárias para calcular o período até sua
-            aposentadoria e quanto falta para chegar ao valor necessário. Essas
-            informações não são armazenadas em lugar algum. Não se preocupe!
+            Informe sua <strong>idade atual</strong> e{" "}
+            <strong>valor guardado</strong> (caso tenha). Essas informações são
+            necessárias para calcular o período até sua aposentadoria e quanto
+            falta para chegar ao valor necessário. Elas não serão armazenadas em
+            lugar algum. Não se preocupe!
           </p>
         </InstructionComponent>
         <InstructionComponent position="2º">
@@ -31,7 +32,7 @@ const InstructionsSection = () => {
             Envie as informações e veja os resultados! Lembrando que os dados
             são <strong>estimativas</strong> e estão sujeitos a grandes
             alterações diante de inúmeros fatores que alteram nossa realidade
-            econômica!
+            econômica e social!
           </p>
         </InstructionComponent>
       </CardsContainer>

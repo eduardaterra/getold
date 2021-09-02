@@ -1,10 +1,13 @@
 import { useEffect, useContext } from "react";
 import { Element } from "react-scroll";
-import AboutSection from "../components/home-sections/AboutSection";
+
 import Header from "../components/header/Header";
-import InitialSection from "../components/home-sections/InitialSection";
-import InstructionsSection from "../components/home-sections/InstructionsSection";
 import MenuModal from "../components/header/MenuModal";
+
+import InitialSection from "../components/home-sections/InitialSection";
+import AboutSection from "../components/home-sections/AboutSection";
+import InstructionsSection from "../components/home-sections/InstructionsSection";
+
 import HeaderContext from "../contexts/HeaderContext";
 
 const Home = () => {
