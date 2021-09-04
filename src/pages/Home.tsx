@@ -3,7 +3,6 @@ import { Element } from "react-scroll";
 
 import Header from "../components/header/Header";
 import MenuModal from "../components/header/MenuModal";
-
 import InitialSection from "../components/home-sections/InitialSection";
 import AboutSection from "../components/home-sections/AboutSection";
 import InstructionsSection from "../components/home-sections/InstructionsSection";

@@ -1,9 +1,9 @@
 import { useEffect, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
+
 import CurrentInfoSection from "../components/form/CurrentInfoSection";
 import RetirementInfoSection from "../components/form/RetirementInfoSection";
-
 import Header from "../components/header/Header";
 
 import FormValidationContext from "../contexts/FormValidationContext";

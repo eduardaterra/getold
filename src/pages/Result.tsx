@@ -1,8 +1,10 @@
 import { useEffect, useContext } from "react";
 import styled from "styled-components";
+
 import Header from "../components/header/Header";
 import ResultScreen from "../components/result/ResultScreen";
 import UnsentFormResult from "../components/result/UnsentFormResult";
+
 import FormValidationContext from "../contexts/FormValidationContext";
 import HeaderContext from "../contexts/HeaderContext";
 
