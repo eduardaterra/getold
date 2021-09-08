@@ -70,6 +70,7 @@ const Container = styled.div`
         > input {
           font-size: 0.8rem;
           height: 2rem;
+          max-width: 6rem;
         }
       }
     }
