@@ -30,10 +30,12 @@ const Container = styled.div`
         font: 500 1.2rem "Ubuntu", sans-serif;
       }
       > input {
+        min-width: 1rem;
         border-radius: 3rem;
         height: 2rem;
         border: none;
         padding: 0.1rem;
+
         font: 500 1rem "Ubuntu", sans-serif;
         text-align: center;
         &::placeholder {

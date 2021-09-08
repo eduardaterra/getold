@@ -6,7 +6,9 @@ const InstructionsSection = () => {
   const history = useHistory();
   return (
     <InstructionsContainer>
-      <h1>Como Utilizar</h1>
+      <TitleContainer>
+        <h1>Como Utilizar</h1>
+      </TitleContainer>
       <CardsContainer>
         <InstructionComponent position="1º">
           <p>
@@ -50,32 +52,34 @@ const InstructionsSection = () => {
 const InstructionsContainer = styled.div`
   background: white;
   width: 100%;
-  height: 90.74vh;
+  height: 90.6vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 4rem;
-  > h1 {
-    font: bold italic 2.5rem "Ubuntu", sans-serif;
-    color: var(--purple);
-    position: absolute;
-    transform: translate(-33.5vw, -21.5vw);
-  }
 
   @media (max-width: 1400px) {
     height: 94.8vh;
-    > h1 {
-      transform: translate(-26vw, -32.5vw);
-    }
   }
   @media (max-width: 970px) {
     height: 100%;
     padding-top: 3rem;
     gap: 0;
+  }
+`;
+
+const TitleContainer = styled.div`
+  width: 80vw;
+  display: flex;
+  justify-content: flex-start;
+
+  > h1 {
+    font: bold italic 2.5rem "Ubuntu", sans-serif;
+    color: var(--purple);
+  }
+  @media (max-width: 970px) {
+    justify-content: center;
     > h1 {
-      position: relative;
-      transform: none;
       font-size: 2rem;
     }
   }
@@ -98,6 +102,7 @@ const CardsContainer = styled.div`
 `;
 
 const Button = styled.div`
+  margin: 2.5rem;
   background: var(--purple);
   border: none;
   border-radius: 3rem;

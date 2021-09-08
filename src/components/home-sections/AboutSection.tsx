@@ -53,7 +53,8 @@ const AboutContainer = styled.div`
     }
   }
   @media (max-width: 1024px) {
-    height: 94.8vh;
+    height: 100vh;
+    padding: 2rem 1rem;
 
     > p {
       font: 500 1.5rem "Ubuntu", sans-serif;
@@ -64,8 +65,6 @@ const AboutContainer = styled.div`
     }
   }
   @media (max-width: 758px) {
-    padding: 2rem 1rem;
-    min-height: 90.3vh;
     > img {
       width: 8rem;
     }
