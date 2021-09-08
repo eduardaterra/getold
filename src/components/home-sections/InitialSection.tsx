@@ -46,6 +46,7 @@ const InitialContainer = styled.div`
   @media (max-width: 758px) {
     gap: 3rem;
     margin-top: 0rem;
+    min-height: 90.3vh;
   }
 `;
 
