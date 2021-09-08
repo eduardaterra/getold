@@ -76,6 +76,7 @@ const TitleContainer = styled.div`
   > h1 {
     font: bold italic 2.5rem "Ubuntu", sans-serif;
     color: var(--purple);
+    padding-top: 2rem;
   }
   @media (max-width: 970px) {
     justify-content: center;
